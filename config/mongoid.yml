@@ -1,8 +1,11 @@
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
-
+      url: "<%= ENV['MONGOHQ_URL'] %>"
+      options:
+        consistency: :strong
+        max_retries: 1
+        retry_interval: 0
 development:
   # Configure available database sessions. (required)
   sessions:
