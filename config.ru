@@ -1,2 +1,3 @@
 require './my_app'
-run Sinatra::Application
+
+run Fungileaks::API

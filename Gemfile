@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
+gem 'grape'
 
 gem 'bson_ext'
 gem 'mongoid'
