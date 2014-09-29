@@ -1,11 +1,15 @@
 require 'grape'
+require 'sinatra'
+
 require 'mongoid'
 require './models/picking'
 
 Mongoid.load!('config/mongoid.yml', ENV['RACK_ENV'].to_sym)
 
 module Fungileaks
+
   class API < Grape::API
+    prefix 'api'
     version 'v1', using: :path
 
     resource :pickings do
@@ -35,4 +39,17 @@ module Fungileaks
       end
     end
   end
+
+  class Web < Sinatra::Base
+    get '/' do
+      'Hello World'
+    end
+  end
+
+  class App < Grape::API
+    mount Web
+    mount API
+  end
+
 end
+

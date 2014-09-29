@@ -1,3 +1,3 @@
 require './my_app'
 
-run Fungileaks::API
+run Fungileaks::App
