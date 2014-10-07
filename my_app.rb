@@ -1,8 +1,18 @@
 require 'grape'
+require 'grape-swagger'
+
 require 'sinatra'
 
 require 'mongoid'
 require './models/picking'
+
+require 'rack/cors'
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: [ :get, :post, :put, :delete, :options ]
+  end
+end
 
 Mongoid.load!('config/mongoid.yml', ENV['RACK_ENV'].to_sym)
 
@@ -13,7 +23,14 @@ module Fungileaks
     version 'v1', using: :path
 
     resource :pickings do
-      desc 'List the latest pickings'
+      desc 'List all pickings'
+
+      get do
+        Picking.all.map(&:as_json)
+      end
+
+      desc 'List the last 10 pickings'
+
       get :latest do
         Picking.order_by('picked_at DESC').limit(10).map(&:as_json)
       end
@@ -38,6 +55,7 @@ module Fungileaks
         picking.as_json
       end
     end
+    add_swagger_documentation
   end
 
   class Web < Sinatra::Base
