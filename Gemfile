@@ -7,3 +7,7 @@ gem 'sinatra'
 
 gem 'bson_ext'
 gem 'mongoid'
+
+group :test do
+  gem 'rack-test'
+end
