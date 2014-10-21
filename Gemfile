@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.2'
+
 gem 'grape'
 gem 'grape-swagger'
 gem 'rack-cors'
