@@ -6,21 +6,19 @@ require 'sinatra'
 require 'mongoid'
 require './models/picking'
 
-require 'rack/cors'
-use Rack::Cors do
-  allow do
-    origins '*'
-    resource '*', headers: :any, methods: [ :get, :post, :put, :delete, :options ]
-  end
-end
-
 Mongoid.load!('config/mongoid.yml', ENV['RACK_ENV'].to_sym)
 
 module Fungileaks
 
   class API < Grape::API
+    VERSION = 'v1'
     prefix 'api'
-    version 'v1', using: :path
+    version VERSION, using: :path
+
+    before do
+      header['Access-Control-Allow-Origin'] = '*'
+      header['Access-Control-Request-Method'] = '*'
+    end
 
     resource :pickings do
       desc 'List all pickings'
@@ -55,7 +53,7 @@ module Fungileaks
         picking.as_json
       end
     end
-    add_swagger_documentation
+    add_swagger_documentation api_version: VERSION
   end
 
   class Web < Sinatra::Base
