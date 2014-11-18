@@ -1,20 +1,11 @@
-require 'grape'
-require 'grape-swagger'
-
-require 'sinatra'
-
-require 'mongoid'
-require './models/picking'
-
-Mongoid.load!('config/mongoid.yml', ENV['RACK_ENV'].to_sym)
+require_relative 'config/application.rb'
 
 module Fungileaks
 
   class API < Grape::API
     VERSION = 'v1'
-    prefix 'api'
     version VERSION, using: :path
-
+    format :json
     before do
       header['Access-Control-Allow-Origin'] = '*'
       header['Access-Control-Request-Method'] = '*'
@@ -24,19 +15,19 @@ module Fungileaks
       desc 'List all pickings'
 
       get do
-        Picking.all.map(&:as_json)
+        Picking.all
       end
 
       desc 'List the last 10 pickings'
 
       get :latest do
-        Picking.order_by('picked_at DESC').limit(10).map(&:as_json)
+        Picking.order_by('picked_at DESC').limit(10)
       end
 
       desc 'Return a picking by its ID'
       route_param :id do
         get do
-          Picking.find(params[:id]).as_json
+          Picking.find(params[:id])
         end
       end
 
@@ -50,7 +41,7 @@ module Fungileaks
       post do
         picking = Fungileaks::Picking.new declared(params)
         picking.save!
-        picking.as_json
+        picking
       end
     end
     add_swagger_documentation api_version: VERSION
