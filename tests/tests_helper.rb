@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require 'pry'
 
 ENV['RACK_ENV'] = 'test'
 

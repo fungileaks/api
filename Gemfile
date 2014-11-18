@@ -13,3 +13,6 @@ gem 'mongoid'
 group :test do
   gem 'rack-test'
 end
+group :development, :test do
+  gem 'pry'
+end
