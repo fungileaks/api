@@ -12,7 +12,6 @@ module Fungileaks
 
   class API < Grape::API
     VERSION = 'v1'
-    prefix 'api'
     version VERSION, using: :path
 
     before do
