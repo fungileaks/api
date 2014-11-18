@@ -9,17 +9,17 @@ class Fungileaks::PickingTest < Minitest::Test
   end
 
   def test_index_returns_success
-    get '/api/v1/pickings'
+    get '/v1/pickings'
     assert last_response.ok?
   end
 
   def test_index_returns_json
-    get '/api/v1/pickings'
+    get '/v1/pickings'
     assert(JSON.parse(last_response.body).kind_of? Array)
   end
 
   def test_index_returns_all_pickings
-    get '/api/v1/pickings'
+    get '/v1/pickings'
 
   end
 end
