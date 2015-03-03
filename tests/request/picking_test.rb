@@ -1,4 +1,3 @@
-require_relative '../../my_app'
 require 'rack/test'
 
 class Fungileaks::PickingTest < Minitest::Test
@@ -47,6 +46,6 @@ class Fungileaks::PickingTest < Minitest::Test
   end
 
   def valid_create_params
-    { picked_at: Time.now, username: 'James Bond', species: 'Psylocybes', latlng: '41.34556,2.123' }
+    { picked_at: Time.now, username: 'James Bond', species: 'Psylocybes', lat: 41.34556, lng: 2.123 }
   end
 end

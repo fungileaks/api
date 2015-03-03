@@ -4,6 +4,7 @@ module Fungileaks
     field :picked_at, type: DateTime
     field :username,  type: String
     field :species,   type: String
-    field :latlng,    type: String
+    field :lat,       type: BigDecimal
+    field :lng,       type: BigDecimal
   end
 end
