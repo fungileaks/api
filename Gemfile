@@ -12,7 +12,10 @@ gem 'mongoid'
 
 group :test do
   gem 'rack-test'
+  gem 'database_cleaner'
+  gem 'mongoid-tree' # required by database cleaner
 end
+
 group :development, :test do
   gem 'pry'
 end

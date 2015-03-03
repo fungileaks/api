@@ -36,7 +36,8 @@ module Fungileaks
         requires :picked_at, type: String, desc: 'The date you picked those'
         requires :username, type: String, desc: 'Your desired user name'
         requires :species, type: String, desc: 'The king of mushroom you picked'
-        requires :latlng, type: String, desc: 'Latitude/longitude, comma separated'
+        requires :lat, type: BigDecimal, desc: 'Latitude'
+        requires :lng, type: BigDecimal, desc: 'Guess what ... Longitude'
       end
       post do
         picking = Fungileaks::Picking.new declared(params)
